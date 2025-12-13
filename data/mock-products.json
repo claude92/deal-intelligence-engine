@@ -1,0 +1,49 @@
+[
+    {
+      "id": "p1",
+      "title": "Mini Power Bank 20W USB-C",
+      "category": "tech-accessory",
+      "currentPrice": 14.99,
+      "soldByAmazon": true,
+      "priceHistory": [
+        { "date": "2025-08-15", "price": 29.99 },
+        { "date": "2025-09-01", "price": 29.99 },
+        { "date": "2025-09-20", "price": 27.99 },
+        { "date": "2025-10-01", "price": 27.99 },
+        { "date": "2025-10-20", "price": 25.99 },
+        { "date": "2025-10-25", "price": 24.99 },
+        { "date": "2025-10-31", "price": 25.99 },
+        { "date": "2025-11-10", "price": 23.99 },
+        { "date": "2025-11-25", "price": 29.99 },
+        { "date": "2025-11-28", "price": 17.99 },
+        { "date": "2025-12-01", "price": 14.99 }
+      ]
+    },
+    {
+      "id": "p2",
+      "title": "Lampada LED Scrivania Touch",
+      "category": "electronics",
+      "currentPrice": 21.99,
+      "soldByAmazon": false,
+      "priceHistory": [
+        { "date": "2025-11-01", "price": 14.99 },
+        { "date": "2025-11-10", "price": 29.99 },
+        { "date": "2025-11-20", "price": 27.99 },
+        { "date": "2025-12-01", "price": 21.99 }
+      ]
+    },
+    {
+      "id": "p3",
+      "title": "Cavo USB-C 2m Nylon",
+      "category": "tech-accessory",
+      "currentPrice": 9.99,
+      "soldByAmazon": true,
+      "priceHistory": [
+        { "date": "2025-09-01", "price": 9.99 },
+        { "date": "2025-10-01", "price": 9.49 },
+        { "date": "2025-11-01", "price": 9.99 },
+        { "date": "2025-12-01", "price": 9.99 }
+      ]
+    }
+  ]
+  
