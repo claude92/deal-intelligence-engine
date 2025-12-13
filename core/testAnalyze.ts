@@ -1,19 +1,14 @@
 import products from "../data/mock-products.json";
-import { analyzeDeal } from "./analyzeDeal";
-import type { Product } from "../models/Product";
-import { buildDecisionSummary } from "./buildDecisionSummary";
+import { runDealAnalysis } from "./runDealAnalysis";
+import { Product } from "../models/Product";
 
+const results = runDealAnalysis(products as Product[]);
 
-(products as Product[]).forEach((product) => {
-  const result = analyzeDeal(product);
-
+results.forEach((r) => {
   console.log("────────────────────────────");
-  console.log("PRODOTTO:", product.title);
-  console.log("PREZZO ATTUALE:", product.currentPrice, "€");
-  console.log("RISULTATO:", result.isValidDeal ? "VALID DEAL ✅" : "NON VALIDO ❌");
-  console.log("SCONTO:", result.discountPercentage + "%");
-  console.log("MOTIVO:", result.reason);
-  console.log("FLAGS:", result.flags);
-  console.log("SUMMARY:", buildDecisionSummary(result));
-
+  console.log("PRODOTTO:", r.title);
+  console.log("PREZZO:", r.currentPrice, "€");
+  console.log("VALIDO:", r.isValidDeal ? "SI ✅" : "NO ❌");
+  console.log("SCONTO:", r.discountPercentage + "%");
+  console.log("SUMMARY:", r.summary);
 });
