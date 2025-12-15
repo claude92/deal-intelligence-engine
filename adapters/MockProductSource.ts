@@ -1,5 +1,5 @@
-import { ProductSource } from "./ProductSource";
-import { Product } from "../models/Product";
+import type { ProductSource } from "./ProductSource";
+import type { Product } from "../models/Product";
 import products from "../data/mock-products.json";
 
 export class MockProductSource implements ProductSource {

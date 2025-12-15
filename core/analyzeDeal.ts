@@ -32,8 +32,7 @@ export function analyzeDeal(product: Product): DealAnalysisResult {
 
     // Calcola sconto attuale rispetto al prezzo medio 90 giorni e minimo 90 giorni
     const discountVsAvg = avg90d > 0 ? 100 * (avg90d - product.currentPrice) / avg90d : 0;
-    const discountVsMin = min90d > 0 ? 100 * (min90d - product.currentPrice) / min90d : 0;
-
+    
     // Fake deal: prezzo corrente gonfiato se negli ultimi 14 giorni il prezzo è stato significativamente più alto del minimo 90d e ora abbassato
     // Semplice euristica: se max14d > min90d * 1.15 && currentPrice ~ min90d
     const fakeDeal = (max14d > min90d * 1.15) && (product.currentPrice <= min90d * 1.02);

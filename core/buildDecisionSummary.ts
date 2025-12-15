@@ -1,4 +1,4 @@
-import { DealAnalysisResult } from "../models/DealAnalysisResult";
+import type { DealAnalysisResult } from "../models/DealAnalysisResult";
 
 export function buildDecisionSummary(result: DealAnalysisResult): string {
   // Caso 1: fake deal (veto assoluto)
