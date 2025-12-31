@@ -1,73 +1,107 @@
-# React + TypeScript + Vite
+# Dashboard - React UI Consumer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🎯 Responsabilità
 
-Currently, two official plugins are available:
+Questa cartella contiene l'**interfaccia utente React** che consuma il core di analisi. È un consumer del sistema, non contiene logica di business.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Struttura
 
-## React Compiler
+- **`src/pages/Dashboard.tsx`**: Pagina principale
+  - Carica prodotti tramite adapter
+  - Chiama `runDealAnalysis` dal core
+  - Visualizza risultati con `DealCard`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **`src/components/DealCard.tsx`**: Componente di visualizzazione
+  - Mostra informazioni prodotto
+  - Evidenzia deal validi/invalidi
+  - Display di summary e flags
 
-## Expanding the ESLint configuration
+- **`src/App.tsx`**: Root component
+- **`src/main.tsx`**: Entry point Vite
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ✅ DO (Cosa DEVE fare)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- ✅ Consumare `core/runDealAnalysis` per ottenere risultati
+- ✅ Usare `adapters/ProductSource` per caricare dati
+- ✅ Visualizzare risultati in modo user-friendly
+- ✅ Gestire stati di loading ed errori
+- ✅ Essere un consumer passivo (non modifica logica)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## ❌ DON'T (Cosa NON DEVE fare)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- ❌ **NON** contenere logica di analisi (usa il core)
+- ❌ **NON** fare calcoli su prezzi o metriche
+- ❌ **NON** modificare il modello `Product` o `DealAnalysisResult`
+- ❌ **NON** accedere direttamente a file system o API (usa adapters)
+- ❌ **NON** dipendere da altri consumers
+
+## 🔗 Dipendenze
+
+**Dipende da:**
+- `../core/` - Per `runDealAnalysis`
+- `../adapters/` - Per `MockProductSource` (o altri)
+- `../models/` - Per tipi TypeScript
+
+**Usato da:**
+- Utenti finali (browser)
+- Build process (Vite)
+
+## 🛠️ Tecnologie
+
+- **React 19**: UI framework
+- **TypeScript**: Type safety
+- **Vite**: Build tool e dev server
+- **CSS**: Styling (inline styles attualmente)
+
+## 📝 Scripts
+
+```bash
+npm run dev      # Dev server (localhost:5173)
+npm run build    # Build produzione → dist/
+npm run preview  # Preview build
+npm run lint     # ESLint
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🔄 Flusso di Esecuzione
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+1. Dashboard.tsx monta
+2. useEffect → MockProductSource.getProducts()
+3. runDealAnalysis(products) dal core
+4. Risultati → DealCard components
+5. Rendering UI
+```
+
+## 📁 Struttura
+
+```
+dashboard/
+├── src/
+│   ├── pages/
+│   │   └── Dashboard.tsx      # Pagina principale
+│   ├── components/
+│   │   └── DealCard.tsx       # Card prodotto
+│   ├── App.tsx                # Root
+│   └── main.tsx               # Entry
+├── public/                    # Assets statici
+├── dist/                      # Build output
+└── package.json               # Dipendenze React/Vite
+```
+
+## ⚠️ Limitazioni
+
+- **Styling**: Attualmente inline styles (non Tailwind come menzionato)
+- **State management**: Solo useState locale (no Redux/Zustand)
+- **Error handling**: Base (no error boundaries avanzati)
+- **Routing**: Single page (no React Router)
+- **Testing**: Nessun test configurato
+
+## 🚀 Estendibilità
+
+Per aggiungere nuove features UI:
+
+1. **Nuove pagine**: Aggiungere in `src/pages/`
+2. **Nuovi componenti**: Aggiungere in `src/components/`
+3. **Routing**: Installare React Router se necessario
+4. **State globale**: Aggiungere Context API o Zustand
+5. **Styling**: Migrare a Tailwind CSS o altro framework
