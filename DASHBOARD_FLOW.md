@@ -60,7 +60,7 @@ sequenceDiagram
         RunAnalysis->>RunAnalysis: Costruisce DealOutput:<br/>{productId, title, currentPrice,<br/>isValidDeal, discountPercentage, summary}
     end
     
-    RunAnalysis-->>Dashboard: DealOutput[] (array completo)
+    RunAnalysis-->>Dashboard: DealOutput array completo
     deactivate RunAnalysis
     
     Dashboard->>Dashboard: Ordina risultati<br/>(validi prima: sort by isValidDeal)
@@ -69,7 +69,7 @@ sequenceDiagram
     
     Dashboard->>Dashboard: Renderizza lista
     
-    loop Per ogni DealOutput in deals[]
+    loop Per ogni DealOutput in deals
         Dashboard->>DealCard: <DealCard deal={deal} />
         activate DealCard
         DealCard->>DealCard: Renderizza:<br/>- Titolo prodotto<br/>- Prezzo attuale<br/>- Sconto %<br/>- Badge (VALID/NON VALIDO)<br/>- Summary
@@ -87,7 +87,7 @@ sequenceDiagram
 flowchart TD
     Start([👤 Utente apre dashboard]) --> Mount[📊 Dashboard monta]
     
-    Mount --> InitState[Inizializza state:<br/>loading = true<br/>deals = []]
+    Mount --> InitState["Inizializza state:<br/>loading = true<br/>deals = array vuoto"]
     
     InitState --> UseEffect[useEffect attivato]
     
@@ -97,7 +97,7 @@ flowchart TD
     
     CallAPI --> ReadJSON[📄 Legge mock-products.json]
     
-    ReadJSON --> ParseData[Parsa JSON → Product[]]
+    ReadJSON --> ParseData["Parsa JSON → Product array"]
     
     ParseData --> CallAnalysis[⚙️ Chiama runDealAnalysis products]
     
@@ -171,7 +171,7 @@ flowchart TD
 flowchart LR
     subgraph "Fase 1: Caricamento Dati"
         A1[JSON File] -->|read| A2[MockProductSource]
-        A2 -->|getProducts| A3[Product[]]
+        A2 -->|getProducts| A3["Product array"]
     end
     
     subgraph "Fase 2: Analisi"
@@ -185,7 +185,7 @@ flowchart LR
     end
     
     subgraph "Fase 3: Presentazione"
-        B7 -->|array| C1[DealOutput[]]
+        B7 -->|array| C1["DealOutput array"]
         C1 -->|ordina| C2[Sorted by isValidDeal]
         C2 -->|state| C3[Dashboard state]
         C3 -->|render| C4[DealCard components]
