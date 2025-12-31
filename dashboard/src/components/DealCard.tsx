@@ -4,6 +4,8 @@ type Props = {
     deal: DealOutput;
 }
 
+// Component separato invece di inline: riusabilità e testabilità. Se in futuro serve
+// una versione compatta o dettagliata, basta creare varianti senza toccare Dashboard.
 export function DealCard({ deal }: Props) {
     return (
         <div
@@ -13,6 +15,8 @@ export function DealCard({ deal }: Props) {
             <p>Sconto: {deal.discountPercentage}%</p>
 
             <p>
+                {/* Colori semantici: verde per validi (go), rosso per non validi (stop).
+                    Feedback visivo immediato prima ancora di leggere il testo. */}
                 <span
                     style={{
                         padding: "4px 8px",
