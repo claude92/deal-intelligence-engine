@@ -107,9 +107,9 @@ flowchart TD
     
     Analyze --> CalcMetrics[Calcola metriche:<br/>• Filtra 90 giorni<br/>• Filtra 14 giorni<br/>• min90d, avg90d, max14d]
     
-    CalcMetrics --> DetectFake[Rileva fake deals:<br/>max14d > min90d * 1.15<br/>&& currentPrice ~ min90d]
+    CalcMetrics --> DetectFake["Rileva fake deals:<br/>max14d maggiore min90d * 1.15<br/>e currentPrice simile min90d"]
     
-    DetectFake --> ValidateDeal[Valida deal:<br/>price <= min90d<br/>|| discount >= 30%]
+    DetectFake --> ValidateDeal["Valida deal:<br/>price minore o uguale min90d<br/>oppure discount maggiore o uguale 30%"]
     
     ValidateDeal --> GenerateFlags[Genera flags:<br/>fakeDeal, lowHistory,<br/>thirdPartyOnly]
     
